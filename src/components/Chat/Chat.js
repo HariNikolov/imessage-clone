@@ -2,12 +2,12 @@ import { IconButton } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./Chat.css";
 import MicNoneIcon from "@material-ui/icons/MicNone";
-import Message from "./Message";
-import db from "./firebase";
+import Message from "../Message/Message";
+import db from "../../firebase/firebase";
 import { useSelector } from "react-redux";
-import { selectChatName, selectChatId } from "./features/chatSlice";
+import { selectChatName, selectChatId } from "../../features/chatSlice";
 import firebase from "firebase";
-import { selectUser } from "./features/userSlice";
+import { selectUser } from "../../features/userSlice";
 import FlipMove from "react-flip-move";
 
 function Chat() {

@@ -3,10 +3,10 @@ import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "./features/userSlice";
+import { selectUser } from "../../features/userSlice";
 import "./Sidebar.css";
-import SidebarChat from "./SidebarChat";
-import db, { auth } from "./firebase";
+import SidebarChat from "../SidebarChat/SidebarChat";
+import db, { auth } from "../../firebase/firebase";
 
 function Sidebar() {
   const user = useSelector(selectUser);
