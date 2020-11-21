@@ -8,14 +8,24 @@ import { useSelector } from "react-redux";
 import { selectChatName, selectChatId } from "../../features/chatSlice";
 import firebase from "firebase";
 import { selectUser } from "../../features/userSlice";
+import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
 import FlipMove from "react-flip-move";
+import Menu from "@material-ui/core/Menu";
+import Picker from "emoji-picker-react";
 
 function Chat() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useSelector(selectUser);
   const [input, setInput] = useState("");
   const chatName = useSelector(selectChatName);
   const chatId = useSelector(selectChatId);
   const [messages, setMessages] = useState([]);
+  const [chosenEmoji, setChosenEmoji] = useState(null);
+
+  const onEmojiClick = (e, emojiObject) => {
+    setChosenEmoji(emojiObject);
+    setInput(input + emojiObject.emoji);
+  };
 
   useEffect(() => {
     if (chatId) {
@@ -47,6 +57,14 @@ function Chat() {
     setInput("");
   };
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className="chat">
       <div className="chat__header">
@@ -72,6 +90,19 @@ function Chat() {
           />
           <button onClick={sendMessage}>Send message</button>
         </form>
+        <IconButton>
+          <EmojiEmotionsIcon onClick={handleClick} />
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            onClick={handleClose}
+          >
+            {<Picker onEmojiClick={onEmojiClick} />}
+          </Menu>
+        </IconButton>
         <IconButton>
           <MicNoneIcon className="chat__mic" />
         </IconButton>
