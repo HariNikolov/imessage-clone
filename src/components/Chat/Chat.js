@@ -57,6 +57,10 @@ function Chat() {
     setInput("");
   };
 
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -84,7 +88,7 @@ function Chat() {
         <form>
           <input
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={handleChange}
             placeholder="iMessage"
             type="text"
           />
